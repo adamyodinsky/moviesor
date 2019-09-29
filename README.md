@@ -1,1 +1,1 @@
-# moviesor
+# Moviesor - Your Ultimate Movie Advisor!
