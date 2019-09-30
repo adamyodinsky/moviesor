@@ -1,18 +1,17 @@
 const express = require('express');
-const randomController = require("../controllers/randomController");
+const scrapeTopMovies = require("../controllers/scrapeTopMovies");
+const mainController = require("../controllers/mainController");
 
 const routes = () => {
     const router = express.Router();
 
     // Main
-    // router.get('./',  function (req, res) {
-    //     res.send('Welcome to Moviesor!')
-    // });
+    router.get('/', mainController.main);
 
     // Random movie
-    router.get('/random', randomController.randomMovieRoute);
+    router.get('/random', scrapeTopMovies.scrapeTopMovies);
 
-    return router;
+return router;
 };
 
 module.exports = routes;
