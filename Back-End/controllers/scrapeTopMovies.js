@@ -8,7 +8,6 @@ const url_tomato = `${config.tomatoUri}/top`;
 
 
 const scrapeTopMovies = async (req, res) => {
-    
     const options = {
         uri: url_tomato,
         transform: (body) => {
@@ -17,11 +16,10 @@ const scrapeTopMovies = async (req, res) => {
     };
     
     let movies = [];
-    
+
     try {
         // grab html page
         let response = await request(options);
-
         // grab all a tags inside td tags
         let a_list = response('.movie_list').find('td.middle_col').find('a');
 
@@ -29,8 +27,8 @@ const scrapeTopMovies = async (req, res) => {
         a_list.each((i, e) => {
             movies.push(e.children[0].data);
         });
-        logger.info({status_code: 200, body: `${movies.length} top movies were scraped` });
-        await res.json({movie: movies});
+        logger.info(`${movies.length} top movies were scraped`);
+        await res.json({movies: movies});
     } catch (error) {
         logger.error(error);
         await res.json(error);
@@ -38,4 +36,4 @@ const scrapeTopMovies = async (req, res) => {
 
 };
 
-module.exports = { scrapeTopMovies };
+module.exports = { scrapeTopMovies: scrapeTopMovies };

@@ -1,15 +1,17 @@
 const express = require('express');
 const scrapeTopMovies = require("../controllers/scrapeTopMovies");
-const mainController = require("../controllers/mainController");
+const mainController = require("../controllers/main");
+const usersController = require("../controllers/createUser");
+const validation = require('../helpers/validation');
+
+
 
 const routes = () => {
     const router = express.Router();
 
-    // Main
     router.get('/', mainController.main);
-
-    // Random movie
-    router.get('/random', scrapeTopMovies.scrapeTopMovies);
+    router.get('/topMovies', scrapeTopMovies.scrapeTopMovies);
+    router.post('/users', validation.userValidationRules('createUser'), validation.validate ,usersController.createUser);
 
 return router;
 };

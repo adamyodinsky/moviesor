@@ -1,16 +1,28 @@
+const config  = require('./config/config');
 const express = require('express');
 const router = require('./routes/router')();
-const bodyParser = require('body-parser');
 const logger  = require('./helpers/logger');
-const config  = require('./config/config');
+const connectDB = require('./config/db');
 
 const app = express();
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
+//init Middleware
+app.use(express.json({extended: true}));
 
-app.use('/', router);
+app.use(function (error, req, res, next) {
+    if(error instanceof SyntaxError){ //Handle SyntaxError here.
+        logger.error("Invalid data");
+        return res.status(500).send({data : "Invalid data"});
+    } else {
+        next();
+    }
+});
+
+app.use('/v1', router);
+
+connectDB();
 
 app.listen(3000, ()=> {
     logger.info(`Server running on ${config.appHost}:${config.appPort}`);
 });
+
