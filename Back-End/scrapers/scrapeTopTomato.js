@@ -1,26 +1,30 @@
-const request = require('request')
-const cheerio = require('cheerio')
+const request = require('request-promise-native');
+const cheerio = require('cheerio');
 
-const url="https://www.rottentomatoes.com/top/"
-movies = []
+const random_item = (items) => items[Math.floor(Math.random()*items.length)];
+let movies = [];
+let movie;
+let response;
 
-request(url, (err, res, html) => {
-    if(!err && res.statusCode == 200) {
-        const $ = cheerio.load(html);
+const randomMovie = async () => {
+    const url = "https://www.rottentomatoes.com/top/";
 
-        const a_list = $('.movie_list').
-                        find('td.middle_col').
-                        find('a');
+    response = request(url, (err, res, html) => {
+        if (!err && res.statusCode === 200) {
+            const $ = cheerio.load(html);
 
-        a_list.each((i, e) =>{
-            movies.push(e.children[0].data);
-        });
+            let a_list = $('.movie_list').find('td.middle_col').find('a');
 
-        return (random_item(movies));
-    }
-});
+            a_list.each((i, e) => {
+                movies.push(e.children[0].data);
+            });
 
-function random_item(items)
-{
-    return items[Math.floor(Math.random()*items.length)];
-}
+            movie = random_item(movies);
+            console.log(movie+"bla");
+        }
+    });
+
+};
+randomMovie();
+
+module.exports = { randomMovie };
