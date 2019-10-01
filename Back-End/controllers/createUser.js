@@ -1,7 +1,4 @@
-const request = require('request-promise-native');
 const logger  = require('../helpers/logger');
-const config  = require('../config/config');
-const { validationResult } = require('express-validator');
 const User = require('../models/User');
 const gravatar = require('gravatar');
 const bcrypt = require('bcrypt');
@@ -15,7 +12,8 @@ const createUser = async (req, res) => {
         let user = await User.findOne({ email });
 
         if(user) {
-            return res.status(400).json({errors: [{msg: `User with ${email} already exists`}]});
+            logger.error(`User ${email} already exists`);
+            return res.status(400).json({errors: [{msg: `User ${email} already exists`}]});
         }
 
         // Get users gravatar
