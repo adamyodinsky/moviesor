@@ -22,9 +22,9 @@ const scrapeTopMovies = async (uri) => {
 
   // grab movies links
   let moviesObjects = $('table.table').children('tbody').children('tr').find('a');
+  // TODO - scrape Rank and rating from current page
 
   // scrape inside a movie page
-
   for (let i=0; i< moviesObjects.length; i++) {
     let link = moviesObjects[i].attribs.href;
     console.log(`${tomato_base}${link}`);
@@ -34,7 +34,8 @@ const scrapeTopMovies = async (uri) => {
     console.log(movie);
 
     //TODO
-    // save movie to data base
+    // add the scraped Rank and rating from current page to the returned movie object
+    // and save movie to data base
     // keep it modulated.. DB logic separated as much as possible from crawler scripts
     sleep(Math.round(Math.random()*3000));
   }
