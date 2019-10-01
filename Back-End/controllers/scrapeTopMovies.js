@@ -30,8 +30,8 @@ const scrapeTopMovies = async (req, res) => {
         logger.info(`${movies.length} top movies were scraped`);
         await res.json({movies: movies});
     } catch (error) {
-        logger.error(error);
-        await res.json(error);
+        logger.error(error.message);
+        await res.json(error.message);
     }
 
 };
