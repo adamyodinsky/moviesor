@@ -9,7 +9,7 @@ const top_uri  = "top/bestofrt";
 
 
 const scrapeTopMovies = async (uri) => {
-
+  let movie;
   const options = {
     uri: uri,
     transform: (body) => {
@@ -29,14 +29,17 @@ const scrapeTopMovies = async (uri) => {
     let link = moviesObjects[i].attribs.href;
     console.log(`${tomato_base}${link}`);
 
+    // scrape movie details from movie specific page
+    movie = await scrapeMovie(`${tomato_base}${link}`);
+    console.log(movie);
 
-    await scrapeMovie(`${tomato_base}${link}`);
-    sleep(Math.random()*3000);
+    //TODO
+    // save movie to data base
+    // keep it modulated.. DB logic separated as much as possible from crawler scripts
+    sleep(Math.round(Math.random()*3000));
   }
 
 };
-
-
 
 
 const scrapeMovie = async(uri) => {
@@ -147,9 +150,12 @@ const scrapeMovie = async(uri) => {
     movie.runtime = runtime.html().trim();
   }
 
-  console.log(movie);
-  // process.exit(0);
+  return movie;
+};
 
+
+const superCrawler = async() => {
+//  TODO create a function that iterate over years.. and crawl all of rotten tomato to DB
 };
 
 scrapeTopMovies(`${tomato_base}/${top_uri}/?year=2000`);
