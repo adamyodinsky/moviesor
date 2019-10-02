@@ -19,7 +19,7 @@ const createUser = async (req, res) => {
         // Get users gravatar
         const avatar = gravatar.url(email, {
             s: '200', // default size
-            r: 'pg',  // rating
+            r: 'pg',  // rate
             d: 'mm'   // default image
         });
 
