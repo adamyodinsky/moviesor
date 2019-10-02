@@ -4,7 +4,7 @@ const bunyan = require('bunyan');
 const config = require('../config/config');
 
 let logger = bunyan.createLogger({
-    name: "Moviesor-BackEnd",
+    name: config.appName,
     src: true,
     streams: [
         {

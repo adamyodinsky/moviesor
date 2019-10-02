@@ -1,4 +1,5 @@
 module.exports = {
+    appName: "Moviesor-BackEnd",
     appHost:  process.env.APP_HOST || "localhost",
     appPort: Number(process.env.APP_PORT || 3000),
     logLevel: process.env.LOG_LEVEL || "info",

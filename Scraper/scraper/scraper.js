@@ -2,12 +2,22 @@ const request = require('request-promise-native');
 const cheerio = require('cheerio');
 const sleep = require('thread-sleep');
 const logger = require('../helpers/logger');
-const saveMovieToDB =  require('../helpers/saveMovieToDB');
+const config = require('../config/config');
 
-
-const tomato_base = "https://www.rottentomatoes.com";
+const tomato_base = config.tomatoUri;
 const top_uri  = "top/bestofrt";
 const interval = 1000;
+
+
+const superCrawler = async (range) => {
+  let length = range.end - range.start;
+  let year = range.start;
+
+  for(let i=0; i<=length; i++){
+    await scrapeYearTopMovies(`${tomato_base}/${top_uri}/?year=${year}`, year);
+    year++;
+  }
+};
 
 
 const scrapeYearTopMovies = async (uri, year) => {
@@ -43,9 +53,7 @@ const scrapeYearTopMovies = async (uri, year) => {
 
     console.log(movie);
 
-    //TODO and save movie to data base
-    // this function does not works right now.. probably it's because only the application that made the initial connection can interact with the DB
-    await saveMovieToDB(movie);
+    // sendMovie(movie);
 
     sleep(Math.round(Math.random()*interval));
     tr_element = tr_element.next(); // move to the next tr element
@@ -204,14 +212,5 @@ const scrapeMovie = async(uri) => {
   return movie;
 };
 
-const superCrawler = async (range) => {
-  let length = range.end - range.start;
-  let year = range.start;
 
-  for(let i=0; i<=length; i++){
-    await scrapeYearTopMovies(`${tomato_base}/${top_uri}/?year=${year}`, year);
-    year++;
-  }
-};
-
-superCrawler({start: 2000, end: 2000});
+// superCrawler({start: 2000, end: 2000});

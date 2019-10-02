@@ -59,7 +59,6 @@ const scrapeTopMovies = async (req, res) => {
         logger.error(error.message);
         await res.status(500).json(error.message);
     }
-
 };
 
 module.exports = { scrapeTopMovies: scrapeTopMovies };
