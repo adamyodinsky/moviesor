@@ -5,7 +5,7 @@ const sleep = require('thread-sleep');
 
 const tomato_base = "https://www.rottentomatoes.com";
 const top_uri  = "top/bestofrt";
-
+const interval = 1000;
 
 
 const scrapeTopMovies = async (uri) => {
@@ -37,7 +37,7 @@ const scrapeTopMovies = async (uri) => {
     // add the scraped Rank and rating from current page to the returned movie object
     // and save movie to data base
     // keep it modulated.. DB logic separated as much as possible from crawler scripts
-    sleep(Math.round(Math.random()*3000));
+    sleep(Math.round(Math.random()*interval));
   }
 
 };
@@ -74,21 +74,32 @@ const scrapeMovie = async(uri) => {
   movie.name  = $('h1').html().trim();
   movie.synopsis = details.text().trim();
 
-  details = details.next('ul').children('li').first();
+  details = details.next('ul').children('li').first(); // first of info element block
 
-  // grab
+  // skip until the matching rating
   let j=0;
-  while((details.children('div.meta-label').html().trim() !== 'Rating:') && j < 10) { j++; };
+  try {
+    while ((details.children('div.meta-label').html().trim() !== 'Rating:') && j < 10) { j++; };
+  } catch (e) {
+    logger.error(e.message);
+  }
 
+  // grab rating
   if(j<10) {
     let rating = details.children('div.meta-value').first();
     movie.rating = rating.html();
   }
 
-  // grab genre
+  // skip until the matching rating
   j=0;
   details = details.next();
-  while((details.children('div.meta-label').html().trim() !== 'Genre:') && j < 10) { j++; };
+  try {
+    while ((details.children('div.meta-label').html().trim() !== 'Genre:') && j < 10) { j++; };
+  } catch (e) {
+    logger.error(e.message);
+  }
+
+  // grab genre
   if(j<10) {
     let genres = details.children('div.meta-value').children('a');
     for (let i = 0; i < genres.length; i++) {
@@ -96,12 +107,16 @@ const scrapeMovie = async(uri) => {
     }
   }
 
-
-  //grab directors
+  // skip until the matching rating
   j=0;
   details = details.next();
-  while((details.children('div.meta-label').html().trim() !== 'Directed By:') && j < 10) { j++; };
+  try {
+    while ((details.children('div.meta-label').html().trim() !== 'Directed By:') && j < 10) { j++; };
+  } catch (e) {
+    logger.error(e.message);
+  }
 
+  //grab directors
   if(j<10) {
     let directors = details.children('div.meta-value').children('a');
     for (let i = 0; i < directors.length; i++) {
@@ -109,11 +124,15 @@ const scrapeMovie = async(uri) => {
     }
   }
 
-  //grab writers
+  // skip until the matching rating
   j=0;
   details = details.next();
-  while((details.children('div.meta-label').html().trim() !== 'Written By:') && j < 10) { j++; };
+  try {while ((details.children('div.meta-label').html().trim() !== 'Written By:') && j < 10) { j++; }
+  } catch (e) {
+    logger.error(e.message);
+  }
 
+  //grab writers
   if(j<10) {
     let writers = details.children('div.meta-value').children('a');
     for (let i = 0; i < writers.length; i++) {
@@ -121,31 +140,44 @@ const scrapeMovie = async(uri) => {
     }
   }
 
-  // grab release date
+  // skip until the matching rating
   j=0;
   details = details.next();
-  while((details.children('div.meta-label').html().trim() !== 'In Theaters:') && j < 10) { j++; };
+  try {while ((details.children('div.meta-label').html().trim() !== 'In Theaters:') && j < 10) { j++; }
+  } catch (e) {
+    logger.error(e.message);
+  }
 
+  // grab release date
   if(j<10) {
     let release = details.children('div.meta-value').children('time');
     movie.release = release.html();
   }
 
-  // grab box office
+  // skip until the matching rating
   j=0;
   details = details.next().next();
-  while((details.children('div.meta-label').html().trim() !== 'Box Office:') && j < 10) { j++; };
+  try {
+    while ((details.children('div.meta-label').html().trim() !== 'Box Office:') && j < 10) { j++; }
+  } catch (e) {
+    logger.error(e.message);
+  }
 
+  // grab box office
   if(j<10) {
     let boxOffice = details.children('div.meta-value');
     movie.boxOffice = boxOffice.html();
   }
 
-  // grab run time
+  // skip until the matching rating
   j=0;
   details = details.next();
-  while((details.children('div.meta-label').html().trim() !== 'Runtime:') && j < 10) { j++; };
+  try {while ((details.children('div.meta-label').html().trim() !== 'Runtime:') && j < 10) { j++; }
+  } catch (e) {
+    logger.error(e.message);
+  }
 
+  // grab run time
   if(j<10) {
     let runtime = details.children('div.meta-value').children('time');
     movie.runtime = runtime.html().trim();
@@ -156,7 +188,7 @@ const scrapeMovie = async(uri) => {
 
 
 const superCrawler = async() => {
-//  TODO create a function that iterate over years.. and crawl all of rotten tomato to DB
+//  TODO create a function that iterate over years.. and crawl all over rotten tomato to DB
 };
 
 scrapeTopMovies(`${tomato_base}/${top_uri}/?year=2000`);
