@@ -3,8 +3,11 @@ const logger = require('../helpers/logger');
 
 const userValidationRules = (method) => {
   switch (method) {
-    case 'createUser': {
+    case 'scrape': {
       return [
+        body('range.start', 'range.start required').not().isEmpty(),
+        body('range.end', 'range.end required').not().isEmpty(),
+        body('collection', 'collection required').not().isEmpty(),
       ]
     }
   }

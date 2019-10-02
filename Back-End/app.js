@@ -15,7 +15,7 @@ app.use(syntaxErr);
 app.use('/v1', router);
 
 
-app.listen(3000, ()=> {
+app.listen(config.appPort, ()=> {
     logger.info(`Server running on ${config.appHost}:${config.appPort}`);
 });
 

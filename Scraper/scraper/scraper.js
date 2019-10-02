@@ -3,6 +3,7 @@ const cheerio = require('cheerio');
 const sleep = require('thread-sleep');
 const logger = require('../helpers/logger');
 const config = require('../config/config');
+const sendMovie = require('../helpers/sendMovie');
 
 const tomato_base = config.tomatoUri;
 const top_uri  = "top/bestofrt";
@@ -53,6 +54,7 @@ const scrapeYearTopMovies = async (uri, year) => {
 
     console.log(movie);
 
+    //TODO
     // sendMovie(movie);
 
     sleep(Math.round(Math.random()*interval));
@@ -212,5 +214,6 @@ const scrapeMovie = async(uri) => {
   return movie;
 };
 
+// superCrawler({start: 2000, end: 2000}); // for test the scraper
 
-// superCrawler({start: 2000, end: 2000});
+module.exports = { superCrawler };

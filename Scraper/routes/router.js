@@ -1,13 +1,10 @@
 const express = require('express');
-const mainController = require("../controllers/ScrapeTomatoByYear");
+const scrape = require("../controllers/scrape");
 const validation = require('../helpers/validation');
-
-
 
 const routes = () => {
     const router = express.Router();
-
-    router.get('/', mainController.main);
+    router.post('/scrape', validation.userValidationRules('scrape'), validation.validate, scrape.scrapeTomatoByYear);
 
 return router;
 };
