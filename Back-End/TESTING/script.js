@@ -187,8 +187,15 @@ const scrapeMovie = async(uri) => {
 };
 
 
-const superCrawler = async() => {
-//  TODO create a function that iterate over years.. and crawl all over rotten tomato to DB
+const superCrawler = async (range) => {
+  let length = range.end - range.start;
+  let year = range.start;
+
+  for(let i=0; i<=length; i++){
+    await scrapeTopMovies(`${tomato_base}/${top_uri}/?year=${year}`);
+    year++;
+  }
 };
 
-scrapeTopMovies(`${tomato_base}/${top_uri}/?year=2000`);
+superCrawler({start: 2000, end: 2001});
+// scrapeTopMovies(`${tomato_base}/${top_uri}/?year=2000`);
