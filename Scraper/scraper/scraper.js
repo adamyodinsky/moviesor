@@ -19,7 +19,6 @@ const superCrawler = async (range) => {
   }
 };
 
-
 const scrapeYearTopMovies = async (uri, year) => {
   logger.info("Scraping Movies From "+ year);
 
