@@ -1,5 +1,5 @@
 const express = require('express');
-const scrapeTopMovies = require("../controllers/scrapeTopMovies");
+const scrapeTopMovies = require("../../scrapeTopMovies");
 const mainController = require("../controllers/main");
 const usersController = require("../controllers/createUser");
 const scrapeController = require('../controllers/scrapeMoviesByYears');

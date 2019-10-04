@@ -3,12 +3,11 @@ const cheerio = require('cheerio');
 const sleep = require('thread-sleep');
 const logger = require('../helpers/logger');
 const config = require('../config/config');
-const sendMovie = require('../helpers/sendMovie');
+const saveMovie = require('../helpers/saveMovie');
 
 const tomato_base = config.tomatoUri;
 const top_uri  = "top/bestofrt";
 const interval = 1000;
-
 
 const superCrawler = async (range) => {
   let length = range.end - range.start;
@@ -39,34 +38,34 @@ const scrapeYearTopMovies = async (uri, year) => {
   let tr_objects = $('table.table').children('tbody').children('tr');
   let tr_element = tr_objects.first();
 
-
+  let storedCount = 0;
+  let scrapedCount = 0;
   // scrape inside a movie page
-  let movie;
   for (let i=0; i<tr_objects.length; i++) {
+  let movie;
     let link = tr_element.find('a').attr('href');
-    console.log(`${tomato_base}${link}`);
 
     // scrape movie details from movie specific page
-    movie = await scrapeMovie(`${tomato_base}${link}`);
+    logger.info(`Scraping From ${tomato_base}${link}`);
+    movie = await scrapeMovie(`${tomato_base}${link}`, year);
     movie.rank = tr_element.children('td.bold').text().trim().replace('.', '');
     movie.rating =  tr_element.find('span.tMeterScore').first().text().trim();
     movie.fullName = tr_element.children('td').children('a').text().trim();
-
     console.log(movie);
+    scrapedCount++;
 
-    //TODO
-    // sendMovie(movie);
+    // count and store movie in DB
+    storedCount += await saveMovie.saveMovie(movie);
 
     sleep(Math.round(Math.random()*interval));
     tr_element = tr_element.next(); // move to the next tr element
   }
 
+  logger.info({Scraped: scrapedCount, Stored: storedCount,  Year: year });
 };
 
 
-const scrapeMovie = async(uri) => {
-  console.log('in scrapeMovie');
-
+const scrapeMovie = async(uri, year) => {
   let movie = {
     fullName: "",
     name: "",
@@ -79,7 +78,9 @@ const scrapeMovie = async(uri) => {
     writers: [],
     release: "",
     boxOffice: "",
-    runtime: ""
+    runtime: "",
+    year: year,
+    uri: uri
   };
 
   const options = {

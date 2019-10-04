@@ -15,13 +15,12 @@ const scrapeTomatoByYear = async (req, res) => {
   }
 
   // start scraping
+  //TODO after scraping finished, send to a webhook api about scraping ended status
   try {
     res.status(202).json({msg: 'Scraping started', range, collection});
     await scrape(range);
-    //TODO after scraping finished, send to a webhook api about scraping ended status
   } catch (error) {
     logger.error(error.message);
-    res.status(500).json(error.message);
   }
 };
 

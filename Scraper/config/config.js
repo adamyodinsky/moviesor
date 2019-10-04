@@ -12,6 +12,10 @@ module.exports = {
     dbManagerHost: process.env.DB_MANAGER_HOST || "localhost",
     dbManagerPort: Number(process.env.APP_PORT || 3002),
     dbManagerApi: process.env.DB_MANAGER_API || "v1",
+    //----------MONGOOSE-CONFIG---------------------------
+    mongoUserName: process.env.MONGO_USER || "Moviesor",
+    mongoPassword: process.env.MONGO_PASS,
+    mongoURI: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@moviesor-5ljou.mongodb.net/test?retryWrites=true&w=majority`,
     //-------------------------
     tomatoUri: "https://www.rottentomatoes.com",
 };

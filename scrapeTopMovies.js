@@ -1,8 +1,8 @@
 const request = require('request-promise-native');
 const cheerio = require('cheerio');
-const logger  = require('../helpers/logger');
-const config  = require('../config/config');
-const Movie   = require('../models/Movie');
+const logger  = require('./Back-End/helpers/logger');
+const config  = require('./Back-End/config/config');
+const Movie   = require('./Back-End/models/Movie');
 
 const url_tomato = `${config.tomatoUri}/top`;
 

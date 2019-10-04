@@ -1,7 +1,7 @@
 const request = require('request-promise-native');
 const cheerio = require('cheerio');
 const sleep = require('thread-sleep');
-const logger = require('../helpers/logger');
+const logger = require('../Back-End/helpers/logger');
 const saveMovieToDB =  require('../helpers/saveMovieToDB');
 
 

@@ -3,8 +3,10 @@ const express = require('express');
 const router = require('./routes/router')();
 const logger  = require('./helpers/logger');
 const syntaxErr = require('./helpers/syntaxErr');
+const connectDB = require('./config/db');
 
 const app = express();
+connectDB();
 
 //init Middleware
 app.use(express.json({extended: true}));
