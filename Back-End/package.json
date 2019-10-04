@@ -12,7 +12,6 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "bunyan": "^1.8.12",
-    "cheerio": "^1.0.0-rc.3",
     "config": "^3.2.2",
     "express": "^4.17.1",
     "express-validator": "^6.2.0",
