@@ -10,7 +10,7 @@ let api  = config.dbManagerApi;
 const sendMovie = (movie) => {
   const options = {
     method: 'POST',
-    uri: `${host}:${port}/${api}/movies/insert`,
+    uri: `${host}:${port}/${api}/catalog/movie`,
     json: true,
     body: {
       movie: movie,

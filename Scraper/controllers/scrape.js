@@ -10,7 +10,7 @@ const scrapeTomatoByYear = async (req, res) => {
   const { range, collection }  = req.body;
 
   if (Number(range.start) < 1920) {
-    logger.warn("Start value is under 1920 - To low");
+    logger.warn("Please choose Start value from 1920 and above.");
     return;
   }
 
@@ -18,7 +18,7 @@ const scrapeTomatoByYear = async (req, res) => {
   try {
     res.status(202).json({msg: 'Scraping started', range, collection});
     await scrape(range);
-    //TODO after scraping finished without an error, send to a webhook api that scraping ended successfully
+    //TODO after scraping finished, send to a webhook api about scraping ended status
   } catch (error) {
     logger.error(error.message);
     res.status(500).json(error.message);

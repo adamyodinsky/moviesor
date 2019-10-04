@@ -1,9 +1,13 @@
 module.exports = {
-    // -----LOCAL-APP-------------------
+    // -----LOCAL-APP-Scraper------------------
     appName: "Moviesor-Scraper",
     appHost:  process.env.APP_HOST || "localhost",
     appPort: Number(process.env.APP_PORT || 3001),
     logLevel: process.env.LOG_LEVEL || "info",
+    // -----Back-End-------------------
+    backEndHost:  process.env.BACKEND_HOST || "localhost",
+    backEndPort: Number(process.env.BACKEND_PORT || 3000),
+    backEndApi: process.env.BACKEND_API || "v1",
     //------DB-MANAGER------------------
     dbManagerHost: process.env.DB_MANAGER_HOST || "localhost",
     dbManagerPort: Number(process.env.APP_PORT || 3002),
