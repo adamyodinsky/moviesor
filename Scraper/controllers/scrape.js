@@ -6,6 +6,7 @@ const scrape  = require('../scraper/scraper').superCrawler;
 
 
 const scrapeTomatoByYear = async (req, res) => {
+  logger.info({body: req.body, headers: req.headers});
 
   const { range, collection }  = req.body;
 
@@ -17,7 +18,7 @@ const scrapeTomatoByYear = async (req, res) => {
   // start scraping
   //TODO after scraping finished, send to a webhook api about scraping ended status
   try {
-    res.status(202).json({msg: 'Scraping started', range, collection});
+    res.status(202).json({range: range, collection: collection, status: "Scraping request Accepted"});
     await scrape(range);
   } catch (error) {
     logger.error(error.message);

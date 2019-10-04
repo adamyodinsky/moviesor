@@ -9,8 +9,8 @@ const app = express();
 connectDB();
 
 //init Middleware
-app.use(express.json({extended: true}));
 app.use(syntaxErr);
+app.use(express.json({extended: true}));
 
 app.use('/v1', router);
 

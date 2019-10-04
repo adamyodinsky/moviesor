@@ -11,8 +11,8 @@ const routes = () => {
     const router = express.Router();
 
     router.get('/', mainController.main);
-    router.post('/users', validation.userValidationRules('createUser'), validation.validate ,usersController.createUser);
-    router.post('/scrape', scrapeController.scrapeMovieByYears);
+    router.post('/users', validation.userValidationRules('users'), validation.validate ,usersController.createUser);
+    router.post('/scrapeMoviesByYears', validation.userValidationRules('scrapeMoviesByYears'), validation.validate, scrapeController.scrapeMovieByYears);
 
 return router;
 };

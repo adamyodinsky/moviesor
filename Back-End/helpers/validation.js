@@ -3,13 +3,17 @@ const logger = require('../helpers/logger');
 
 const userValidationRules = (method) => {
   switch (method) {
-    case 'createUser': {
+    case 'users':
       return [
         body('name', 'Name is required').not().isEmpty(),
         body('email', 'Please include a valid email').isEmail(),
         body('password', 'Please enter a password with 6 or more characters').isLength({min: 6})
+      ];
+    case 'scrapeMoviesByYears':
+      return [
+          body('collection', 'collection is required').not().isEmpty(),
+          body('range', 'range is required').not().isEmpty()
       ]
-    }
   }
 };
 
