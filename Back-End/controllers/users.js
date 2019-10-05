@@ -2,6 +2,8 @@ const logger  = require('../helpers/logger');
 const Users = require('../models/User');
 const gravatar = require('gravatar');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 
 const user = async (req, res) => {
     logger.info(req.body);
@@ -34,9 +36,22 @@ const user = async (req, res) => {
         // save user to data base
         await user.save();
 
-     // return jsonwebtoken
+        const payload = {
+            user: {
+                id: user.id
+            }
+        };
 
-        await res.json(`User ${name} has been registered successfully`);
+        jwt.sign(
+            payload,
+            config.jwtToken,
+            {expiresIn: 3600 },
+            (err, token) => {
+                if(err) throw err;
+                res.status(201).json({ token });
+            }
+            );
+        // await res.json(`User ${email} has been registered successfully`);
     } catch (error) {
         logger.error(error.message);
         await res.status(500).json(error.message);

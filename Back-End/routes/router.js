@@ -9,9 +9,9 @@ const routes = () => {
     const router = express.Router();
 
     router.get('/health', health);
+    router.get('/auth', auth);
     router.post('/users', validationRules('users'), validate ,createUser);
     router.post('/scrapeMoviesByYears', validationRules('scrapeMoviesByYears'), validate, scrapeMovieByYears);
-    router.post('/auth', auth);
 return router;
 };
 

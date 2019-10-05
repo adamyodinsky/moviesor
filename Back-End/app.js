@@ -3,7 +3,7 @@ const express = require('express');
 const router = require('./routes/router')();
 const logger  = require('./helpers/logger');
 const connectDB = require('./config/db');
-const syntaxErr = require('./helpers/syntaxErr');
+const syntaxErr = require('./middleware/syntaxErr');
 
 const app = express();
 connectDB();
