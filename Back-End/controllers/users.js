@@ -45,7 +45,7 @@ const user = async (req, res) => {
         jwt.sign(
             payload,
             config.jwtToken,
-            {expiresIn: 3600 },
+            {expiresIn: config.tokenExpiration },
             (err, token) => {
                 if(err) throw err;
                 res.status(201).json({ token });
