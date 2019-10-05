@@ -4,6 +4,7 @@ module.exports = {
     appHost:  process.env.APP_HOST || "localhost",
     appPort: Number(process.env.APP_PORT || 3001),
     logLevel: process.env.LOG_LEVEL || "info",
+    logsPath: process.env.LOGS_PATH || "./logs",
     // -----Back-End-------------------
     backEndHost:  process.env.BACKEND_HOST || "localhost",
     backEndPort: Number(process.env.BACKEND_PORT || 3000),

@@ -4,6 +4,7 @@ module.exports = {
     appHost:  process.env.APP_HOST || "localhost",
     appPort: Number(process.env.APP_PORT || 3000),
     logLevel: process.env.LOG_LEVEL || "info",
+    logsPath: process.env.LOGS_PATH || "./logs",
     //---------SCRAPER------------------------------
     scraperHost: process.env.SCRAPER_HOST || "localhost",
     scraperPort: Number(process.env.SCRAPER_PORT) || 3001,
