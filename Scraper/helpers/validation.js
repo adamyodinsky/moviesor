@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const logger = require('../helpers/logger');
 
-const userValidationRules = (method) => {
+const validationRules = (method) => {
   switch (method) {
     case 'scrape': {
       return [
@@ -36,7 +36,7 @@ const validate = (req, res, next) => {
 
 
 module.exports = {
-  userValidationRules,
+  validationRules,
   validate,
 };
 

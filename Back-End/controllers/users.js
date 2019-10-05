@@ -1,15 +1,15 @@
 const logger  = require('../helpers/logger');
-const User = require('../models/User');
+const Users = require('../models/User');
 const gravatar = require('gravatar');
 const bcrypt = require('bcrypt');
 
-const createUser = async (req, res) => {
+const user = async (req, res) => {
     logger.info(req.body);
     const { name, password, email } = req.body;
 
     try {
         // See if user exists
-        let user = await User.findOne({ email });
+        let user = await Users.findOne({ email });
 
         if(user) {
             logger.error(`User ${email} already exists`);
@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
         });
 
         // Create a user
-        user = new User({name, email, avatar, password});
+        user = new Users({name, email, avatar, password});
 
         // Encrypt password - bcrypt
         const salt = await bcrypt.genSalt(10);
@@ -44,4 +44,4 @@ const createUser = async (req, res) => {
 
 };
 
-module.exports  = { createUser };
+module.exports  = { createUser: user };

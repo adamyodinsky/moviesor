@@ -7,7 +7,7 @@ const saveMovie = require('../helpers/saveMovie');
 
 const tomato_base = config.tomatoUri;
 const top_uri  = "top/bestofrt";
-const interval = 1000;
+const interval = 5000;
 
 const superCrawler = async (range) => {
   let length = range.end - range.start;
@@ -33,13 +33,15 @@ const scrapeYearTopMovies = async (uri, year) => {
   let $ = await request(options);
 
   // grab objects of movies
-  let moviesObjects_a = $('table.table').children('tbody').children('tr').find('a');
+  // let moviesObjects_a = $('table.table').children('tbody').children('tr').find('a');
   let tr_objects = $('table.table').children('tbody').children('tr');
   let tr_element = tr_objects.first();
 
   let storedCount = 0;
   let scrapedCount = 0;
   // scrape inside a movie page
+  logger.info(`Preparing to scrape ${tr_objects.length} movies, From ${year}`);
+  sleep(1000);
   for (let i=0; i<tr_objects.length; i++) {
   let movie;
     let link = tr_element.find('a').attr('href');
@@ -56,7 +58,7 @@ const scrapeYearTopMovies = async (uri, year) => {
     // count and store movie in DB
     storedCount += await saveMovie.saveMovie(movie);
 
-    sleep(Math.round(Math.random()*interval));
+    sleep(Math.round(interval + Math.random()*interval));
     tr_element = tr_element.next(); // move to the next tr element
   }
 

@@ -13,7 +13,7 @@ const saveMovie = async ( movie ) => {
 
       const newMovie = new Movie( {...movie} );
       await newMovie.save();
-      logger.info(`Saved Movie: ${movie.name}, Year: ${movie.release}`);
+      logger.info(`Stored In DB - Movie: ${movie.name}, Year: ${movie.year}`);
       return 1;
   } catch (err) {
       logger.error(err.message);
