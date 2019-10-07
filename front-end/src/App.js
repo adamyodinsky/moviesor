@@ -1,20 +1,44 @@
 import React, { Component } from 'react';
+import  classNames from 'classnames';
 import logo from './logo.svg';
-import './styles.scss';
+// import './styles.scss';
+import './test.scss'
 import MochooButton from './components/MochooButton/MochooeButton'
 
 class App extends Component {
+    state = {
+      animated: false,
+    };
 
-  clicked = () => {
-    console.log('Clicked!');
+
+  clicked = (event) => {
+    this.setState({
+      animated: true,
+    });
+
+    setTimeout(() => {
+      this.setState({
+        animated: false,
+      });
+      }, 1300
+    );
   };
 
   render() {
+
+
     return (
         <div className="App">
-          <h1>MoChooe</h1>
-          <MochooButton/>
-          <button className='btn third'> MoChooe!</button>
+          <a className={classNames('btn', {
+            'btn--clicked': this.state.animated
+          })} onClick={this.clicked}>MoChooe!</a>
+          {
+            ['blue', 'orange', 'green', 'white'].map((color) => (
+                <span className={classNames('color', `color--${color}`, {
+                  expanded: this.state.animated
+                })} data-value="1" />
+            ))
+          }
         </div>
     )
   }
