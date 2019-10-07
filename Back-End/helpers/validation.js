@@ -3,6 +3,10 @@ const logger = require('../helpers/logger');
 
 const validationRules = (method) => {
   switch (method) {
+    case 'login': return [
+        body('email', 'Please include a valid email').isEmail(),
+        body('password', 'Please enter a password').not().isEmpty()
+    ];
     case 'users':
       return [
         body('name', 'Name is required').not().isEmpty(),

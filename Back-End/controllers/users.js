@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 
 const user = async (req, res) => {
-    logger.info(req.body);
     const { name, password, email } = req.body;
 
     try {
@@ -14,7 +13,7 @@ const user = async (req, res) => {
         let user = await Users.findOne({ email });
 
         if(user) {
-            logger.error(`User ${email} already exists`);
+            logger.info(`User ${email} already exists`);
             return res.status(400).json({errors: [{msg: `User ${email} already exists`}]});
         }
 
