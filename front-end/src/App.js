@@ -28,10 +28,10 @@ class App extends Component {
 
 
     return (
-        <div className="App">
+        <div>
           <a className={classNames('btn', {
             'btn--clicked': this.state.animated
-          })} onClick={this.clicked}>MoChooe!</a>
+          })} onClick={this.clicked}>MoChooe</a>
           {
             ['blue', 'orange', 'green', 'white'].map((color) => (
                 <span className={classNames('color', `color--${color}`, {
@@ -40,6 +40,7 @@ class App extends Component {
             ))
           }
         </div>
+
     )
   }
 }

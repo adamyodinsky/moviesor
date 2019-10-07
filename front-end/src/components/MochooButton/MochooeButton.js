@@ -1,12 +1,12 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const mochooeButton = (props) => {
  return (
-     <div>
-       <button onClick={props.click}> MoChooe!</button>
-     </div>
- )
+ <div>
 
+ </div>
+     )
 };
 
 export default 'mochooeButton';
