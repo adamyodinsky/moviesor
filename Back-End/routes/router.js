@@ -1,7 +1,7 @@
 const express = require('express');
 const { createUser } = require("../controllers/users");
 const { scrapeMovieByYears } = require('../controllers/scrapeMoviesByYears');
-const { validate , validationRules } = require('../helpers/validation');
+const { validate , validationRules } = require('../middleware/validation');
 const { health } = require('../controllers/health');
 const { auth , login } = require('../controllers/auth');
 const { authMW } = require('../middleware/authMW');
@@ -17,7 +17,7 @@ const routes = () => {
     router.post('/users', validationRules('users'), validate ,createUser);
 
     // Movies
-    router.get('/movie', getRandomMovie);
+    router.get('/movie', validationRules('getMovie'), validate, getRandomMovie);
     router.post('/scrapeMoviesByYears', authMW, validationRules('scrapeMoviesByYears'), validate, scrapeMovieByYears);
 
 return router;

@@ -7,6 +7,8 @@ module.exports = {
     logsPath: process.env.LOGS_PATH || "./logs",
     jwtToken: process.env.JWT_SECRET,
     tokenExpiration: Number(process.env.TOKEN_EXPR) || 36000000,
+    yearMax: Number(process.env.YEAR_MAX) || 2019,
+    yearMin: Number(process.env.YEAR_MIN) || 1920,
     //---------SCRAPER------------------------------
     scraperHost: process.env.SCRAPER_HOST || "localhost",
     scraperPort: Number(process.env.SCRAPER_PORT) || 3001,
