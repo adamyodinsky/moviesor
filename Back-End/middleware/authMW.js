@@ -6,7 +6,7 @@ const authMW = (req, res, next) => {
 //  Get the token from the header
   const token = req.header('x-auth-token');
 
-//  Check if no token
+//  Check if there is no token
   if(!token) {
     logger.info({status: 401, body: 'No token. Authorization denied'});
     return res.status(401).json("No token. Authorization denied");

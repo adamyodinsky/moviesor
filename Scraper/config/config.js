@@ -17,6 +17,7 @@ module.exports = {
     mongoUserName: process.env.MONGO_USER || "Moviesor",
     mongoPassword: process.env.MONGO_PASS,
     mongoURI: `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@moviesor-5ljou.mongodb.net/test?retryWrites=true&w=majority`,
+    tomatoModelName: process.env.TOMATO_MODEL || 'tomato-movies',
     //-------------------------
     tomatoUri: "https://www.rottentomatoes.com",
 };

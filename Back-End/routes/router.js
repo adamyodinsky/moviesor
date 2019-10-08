@@ -5,15 +5,20 @@ const { validate , validationRules } = require('../helpers/validation');
 const { health } = require('../controllers/health');
 const { auth , login } = require('../controllers/auth');
 const { authMW } = require('../middleware/authMW');
+const { getRandomMovie } = require('../controllers/movie');
 
 const routes = () => {
     const router = express.Router();
 
+    //  Users and Authentication
     router.get('/health', health);
     router.get('/auth',authMW, auth);
     router.post('/auth', validationRules('login'), validate, login);
     router.post('/users', validationRules('users'), validate ,createUser);
-    router.post('/scrapeMoviesByYears', validationRules('scrapeMoviesByYears'), validate, scrapeMovieByYears);
+
+    // Movies
+    router.get('/movie', getRandomMovie);
+    router.post('/scrapeMoviesByYears', authMW, validationRules('scrapeMoviesByYears'), validate, scrapeMovieByYears);
 
 return router;
 };

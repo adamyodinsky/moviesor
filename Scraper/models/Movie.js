@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const config = require('../config/config');
 
 const MovieSchema = new mongoose.Schema({
   name: {
@@ -52,6 +52,6 @@ const MovieSchema = new mongoose.Schema({
   }
 });
 
-const Movie = mongoose.model('tomato-movies', MovieSchema);
+const Movie = mongoose.model(config.tomatoModelName, MovieSchema);
 
 module.exports = Movie;
