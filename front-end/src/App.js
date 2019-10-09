@@ -17,10 +17,9 @@ class App extends Component {
 
         try {
           const response = await axios.get(url);
+          console.log(response.data);
           this.setState({
-            movie :{
-              name : response.data.fullName
-            },
+            movie :response.data,
             showMovies: true
           });
 
@@ -35,7 +34,7 @@ class App extends Component {
       if (this.state.showMovies) {
         movies = (
             <div>
-              <Movie  movie={this.state.movie.name} />
+              <Movie  movie={this.state.movie} />
             </div>
         )
       }
@@ -50,6 +49,6 @@ class App extends Component {
           </div>
       )
     }
-};
+}
 
 export default App;

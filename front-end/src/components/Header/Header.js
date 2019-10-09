@@ -4,7 +4,7 @@ import './Header.css';
 const Header = () => {
   return (
       <header className='Header'>
-        <h1>Welcome to MoChooe</h1>
+        <h1>Choose a Movie</h1>
       </header>
   )
 };

@@ -1,6 +1,28 @@
 .Movie {
-    padding: 50px;
-    font-size: 5vw;
+    align-content: normal;
+    font-family: Futura;
+}
+
+h2 {
+    font-size: 4vw;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 25px;
     font-family: Futura;
     font-weight: bold;
+}
+
+span {
+    text-align: left ;
+    font-size: 20px;
+}
+
+article {
+    font-size: 20px;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-bottom: 5vw;
+    box-sizing: border-box;
 }
