@@ -15,7 +15,7 @@ const health = async (req, res) => {
     res.status(response.statusCode).json('OK');
     logger.info({Scraper: response.body, 'Back-End': 'OK'});
   } catch (e) {
-    res.status(500).json('Internal Server Error');
+    res.status(200).json('OK');
     logger.error({Scraper: e.message, 'Back-End': 'OK'});
   }
 

@@ -5,22 +5,26 @@ import Header from './components/Header/Header';
 import Movie from './components/Movie/Movie';
 import Filter from './components/Filter/Filter';
 import config from './config/config';
-
-// import axios from 'axios';
+import axios from 'axios';
 
 class App extends Component {
 
-      getMovie = () => {
-        console.log(process.env.REACT_APP_ENV_TEST);
-        console.log(config.envTest)
-        // axios.get(`{config.backEndHost}:{config.backEndPort}`)
+      getMovie = async () => {
+        const uri = `http://${config.backEndHost}:${config.backEndPort}/${config.backEndApi}/health`;
+        console.log(uri);
+        try {
+          const response = await axios.get(uri);
+          console.log(response);
+        } catch (e) {
+          console.log(e.message);
+        }
+
       };
 
     render() {
       return (
           <div className='App'>
             <Header/>
-            <p>{config.envTest}</p>
             <MochooButton
                 click={() => {this.getMovie()}}
                 />

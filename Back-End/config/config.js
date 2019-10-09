@@ -13,6 +13,9 @@ module.exports = {
     scraperHost: process.env.SCRAPER_HOST || "localhost",
     scraperPort: Number(process.env.SCRAPER_PORT) || 3001,
     scraperApi: process.env.SCRAPER_API || "v1",
+    //----------FRONT-END----------------------------
+    frontEndHost: process.env.FRONTEND_HOST || 'localhost',
+    frontEndPort: Number(process.env.FRONTEND_PORT) || 3006,
     //----------MONGOOSE----------------------------
     mongoUserName: process.env.MONGO_USER || "Moviesor",
     mongoPassword: process.env.MONGO_PASS,
