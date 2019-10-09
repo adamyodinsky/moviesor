@@ -4,7 +4,7 @@ import './MochooButton.css'
 const mochooBottun = (props) => {
   return (
     <section>
-        <button className='glow-on-hover'>MoChooe</button>
+        <button className='glow-on-hover' onClick={props.click}>MoChooe</button>
     </section>
   )
 };
