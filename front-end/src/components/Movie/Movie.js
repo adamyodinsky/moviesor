@@ -1,10 +1,10 @@
 import './Movie.css'
 import React from 'react';
 
-const Movie = () => {
+const Movie = (props) => {
   return (
-      <article>
-
+      <article className='Movie'>
+        {props.movie}
       </article>
   );
 };

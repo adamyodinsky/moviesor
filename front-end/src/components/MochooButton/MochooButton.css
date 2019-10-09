@@ -1,7 +1,7 @@
 
 .glow-on-hover {
-    width: 200px;
-    height: 80px;
+    width: 25vw;
+    height: 10vw;
     border: none;
     outline: none;
     color: #fff;
@@ -9,26 +9,27 @@
     cursor: pointer;
     position: relative;
     z-index: 0;
-    border-radius: 300px;
-    font-size: xx-large;
-    font-family: "Arial Black";
+    border-radius: 30vw;
+    font-size: 4vw;
+    font-family: Futura;
+    font-weight: bold;
 }
 
 .glow-on-hover:before {
     content: '';
     background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
     position: absolute;
-    top: -2px;
-    left:-2px;
+    top: -0.2vw;
+    left:-0.2vw;
     background-size: 400%;
     z-index: -1;
-    filter: blur(5px);
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
+    filter: blur(0.5vw);
+    width: calc(100% + 0.3vw);
+    height: calc(100% + 0.3vw);
     animation: glowing 20s linear infinite;
     opacity: 0;
     transition: opacity .3s ease-in-out;
-    border-radius: 10px;
+    border-radius: 0.10vw;
 }
 
 .glow-on-hover:active {
@@ -52,7 +53,7 @@
     background: #111;
     left: 0;
     top: 0;
-    border-radius: 10px;
+    border-radius: 0.10vw;
 }
 
 @keyframes glowing {

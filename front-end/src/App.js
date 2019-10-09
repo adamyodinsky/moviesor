@@ -4,31 +4,47 @@ import MochooButton from './components/MochooButton/MochooBotton';
 import Header from './components/Header/Header';
 import Movie from './components/Movie/Movie';
 import Filter from './components/Filter/Filter';
-import config from './config/config';
+import {default as configs} from './config/config';
 import axios from 'axios';
 
 class App extends Component {
+      state = {
+        showMovies : false
+      };
 
       getMovie = async () => {
-        const uri = `http://${config.backEndHost}:${config.backEndPort}/${config.backEndApi}/health`;
-        console.log(uri);
+        const url =  `http://${configs.backEndHost}:${configs.backEndPort}/${configs.backEndApi}/movie?start=2009&end=2019`;
+
         try {
-          const response = await axios.get(uri);
-          console.log(response);
+          const response = await axios.get(url);
+          this.setState({
+            movie :{
+              name : response.data.fullName
+            },
+            showMovies: true
+          });
+
         } catch (e) {
           console.log(e.message);
         }
-
       };
 
     render() {
+      let movies = null;
+
+      if (this.state.showMovies) {
+        movies = (
+            <div>
+              <Movie  movie={this.state.movie.name} />
+            </div>
+        )
+      }
+
       return (
           <div className='App'>
             <Header/>
-            <MochooButton
-                click={() => {this.getMovie()}}
-                />
-            <Movie/>
+            <MochooButton click={() => {this.getMovie()}} />
+            {movies}
             <Filter/>
             <footer/>
           </div>

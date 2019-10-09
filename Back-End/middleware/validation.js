@@ -4,7 +4,7 @@ const config = require('../config/config');
 
 const validationRules = (method) => {
   switch (method) {
-    case 'login': return [
+    case 'login': return  [
           body('email', 'Please include a valid email').isEmail(),
           body('password', 'Please enter a password').not().isEmpty()
       ];
