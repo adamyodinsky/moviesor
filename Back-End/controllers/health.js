@@ -12,11 +12,11 @@ const health = async (req, res) => {
 
   try {
     const response = await request(options);
-    res.status(response.statusCode).json(response.body);
-    logger.info({statusCode: response.statusCode, body: response.body})
+    res.status(response.statusCode).json('OK');
+    logger.info({Scraper: response.body, 'Back-End': 'OK'});
   } catch (e) {
-    res.status(500).json(e.message);
-    logger.error(e.message);
+    res.status(500).json('Internal Server Error');
+    logger.error({Scraper: e.message, 'Back-End': 'OK'});
   }
 
 };
