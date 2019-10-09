@@ -16,6 +16,7 @@ const Movie = (props) => {
 
   let Geners = DetailsHelper(movie.genres, 'Genre');
   let Writers = DetailsHelper(movie.writers, 'Writer');
+  let Length = movie.runtime ? `Length: ${movie.runtime}` : null ;
 
   return (
       <div className='Movie'>
@@ -25,6 +26,7 @@ const Movie = (props) => {
         <span>
           <p>{Geners}</p>
           <p>{Writers}</p>
+          <p>{Length}</p>
         </span>
         <h3>
           Synopsis:
