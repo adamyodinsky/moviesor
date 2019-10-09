@@ -11,9 +11,8 @@ import config from './config/config';
 class App extends Component {
 
       getMovie = () => {
-        console.log(process.env.APP_HOST);
-        console.log((config.appPort))
-        console.log(config.appHost)
+        console.log(process.env.REACT_APP_ENV_TEST);
+        console.log(config.envTest)
         // axios.get(`{config.backEndHost}:{config.backEndPort}`)
       };
 
@@ -21,7 +20,7 @@ class App extends Component {
       return (
           <div className='App'>
             <Header/>
-            <p>{config.appHost}</p>
+            <p>{config.envTest}</p>
             <MochooButton
                 click={() => {this.getMovie()}}
                 />

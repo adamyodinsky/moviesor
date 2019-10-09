@@ -7,7 +7,8 @@ const config = {
     yearMin: Number(process.env.REACT_APP_YEAR_MIN) || 1920,
     //---------BACk-END------------------------------
     backEndHost: process.env.REACT_APP_BACKEND_HOST || "localhost",
-    backEndPort: Number(process.env.REACT_APP_BACKEND_PORT) || 80
+    backEndPort: Number(process.env.REACT_APP_BACKEND_PORT) || 80,
+    envTest: process.env.REACT_APP_ENV_TEST || 'env test failed'
 };
 
 export default config;
